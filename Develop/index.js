@@ -238,10 +238,25 @@ const promptForEngineer = () => {
         })
 };
 
+//Show the question of intern on the terminal and create a intern class
+const promptForIntern = () => {
+    inquirer.prompt(internQuestion)
+        .then(answer => {
+            const name = capitalize(answer.name);
+            const email = answer.email;
+            const school = capitalize(answer.school);
+            //With the answer create a new intern object
+            const newIntern = new Intern(name, answer.id, email.toLowerCase(), school);
+            employees.push(newIntern);
+            //Call the prompt member to ask if you want to add a new member
+            promptForNewMember();
+
+        })
+};
+
 //Start the functionality of application
 const init = () => {
     //Show the question of manager on the terminal
     promptForManager();
-
 };
 init();
