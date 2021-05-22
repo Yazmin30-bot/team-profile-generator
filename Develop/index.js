@@ -33,7 +33,7 @@ const managerQuestion = [
         name: "id",
         message: "What is the team manager's id?",
         validate: answer => {
-            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
+            if (/^[0-9]+$/.test(answer) && idArray.indexOf(answer) === -1) {
                 return true;
             }
             return "Please enter at least one character and dont use an exist id"
@@ -86,7 +86,7 @@ const engineerQuestion = [
         name: "id",
         message: "What is your engineer's id?",
         validate: answer => {
-            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
+            if (/^[0-9]+$/.test(answer) && idArray.indexOf(answer) === -1) {
                 return true;
             }
             return "Please enter at least one character and dont use an exist id"
@@ -139,7 +139,7 @@ const internQuestion = [
         name: "id",
         message: "What is your intern's id?",
         validate: answer => {
-            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
+            if (/^[0-9]+$/.test(answer) && idArray.indexOf(answer) === -1) {
                 return true;
             }
             return "Please enter at least one character and dont use an exist id"
@@ -187,7 +187,7 @@ const memberTeam = [
 ];
 
 //Capitalize every word in a sentence
-function capitalize(str){
+function capitalize(str) {
     str = str.toLowerCase();
     return finalSentence = str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
@@ -199,13 +199,15 @@ const promptForNewMember = () => {
             //Show the question to add a new engineer member
             if (answer.member === "Engineer") {
                 promptForEngineer();
-            //Show the question to add a new intern member    
+                //Show the question to add a new intern member    
             } else if (answer.member === "Intern") {
                 promptForIntern();
             } else {
                 //Create a html with the memebers added 
                 renderOutput(employees);
-                
+
+
+
             }
 
         })
@@ -263,37 +265,37 @@ const promptForIntern = () => {
 function renderOutput(memberArray) {
     memberArray.forEach(member => {
         if (member.getRole() === "Manager") {
-            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
+            const email = '<a href="mailto:' + member.getEmail() + '">Email: ' + member.getEmail() + '</a>';
             const data = [member.getName(), member.getId(), email, member.getOfficeNumber()];
-            const regexArray = ["name-manager", "id-manager", "email-manager", "phone-manager"];
+            const regexArray = ["name", "ids", "email", "phone"];
             const srcURL = './src/manager.html';
             const destURL = './dist/manager-' + member.getId() + '.html';
             //Fill out manager html file with the object manager
-            fileMember(srcURL, destURL, data, regexArray);   
+            fileMember(srcURL, destURL, data, regexArray);
         } else if (member.getRole() === "Engineer") {
-            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
-            const github ='<a href="https://github.com/'+member.getGithub()+'" target="blank">GitHub: '+member.getGithub()+'</a>'
+            const email = '<a href="mailto:' + member.getEmail() + '">Email: ' + member.getEmail() + '</a>';
+            const github = '<a href="https://github.com/' + member.getGithub() + '" target="blank">GitHub: ' + member.getGithub() + '</a>'
             const data = [member.getName(), member.getId(), email, github];
-            const regexArray = ["name-engineer", "id-engineer", "email-engineer", "github-engineer"];
+            const regexArray = ["name", "id-engineer", "email-engineer", "github-engineer"];
             const srcURL = path.resolve(__dirname, './src/engineer.html');
             const destURL = path.resolve(__dirname, './dist/engineer-' + member.getId() + '.html');
             //Fill out engineer html file with the object engineer 
             fileMember(srcURL, destURL, data, regexArray);
         } else if (member.getRole() === "Intern") {
-            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
+            const email = '<a href="mailto:' + member.getEmail() + '">Email: ' + member.getEmail() + '</a>';
             const data = [member.getName(), member.getId(), email, member.getSchool()];
             const regexArray = ["name-intern", "id-intern", "email-intern", "school-intern"];
             const srcURL = path.resolve(__dirname, './src/intern.html');
             const destURL = path.resolve(__dirname, './dist/intern-' + member.getId() + '.html');
-             //Fil intern html file with the object intern 
+            //Fil intern html file with the object intern 
             fileMember(srcURL, destURL, data, regexArray);
         }
 
     });
 
+
     //Create a final html 
     fillIndex();
-
 
 };
 
@@ -302,20 +304,21 @@ function fileMember(srcURL, destURL, data, regexArray) {
     //Take the original template and create another with the info of the member
     createFile(srcURL, destURL);
     for (let i = 0; i < data.length; i++) {
-          replace({
-              regex: regexArray[i],
-              replacement: data[i],
-              paths: [destURL],
-              recursive: false,
-              silent: false,
-          });  
+        replace({
+            regex: regexArray[i],
+            replacement: data[i],
+            paths: [destURL],
+            recursive: true,
+            silent: true,
+        });
     }
     //Add the updated template to array (Append every template member such a string) 
     memberInfoFinal.push(myfun(destURL));
 };
 
 //Read the file and returns its content
-function myfun(filePath){
+function myfun(filePath) {
+    console.log(fs.readFileSync(filePath, 'utf8'));
     return fs.readFileSync(filePath, 'utf8');
 };
 
@@ -326,13 +329,13 @@ function fillIndex() {
     createFile(srcIndex, destIndex);
     const content = memberInfoFinal.join('');
 
-     replace({
+    replace({
         regex: "content-index",
         replacement: content,
         paths: [destIndex],
-        recursive: false,
-        silent: false,
-    });  
+        recursive: true,
+        silent: true,
+    });
 };
 
 //Create another with the info of the member
