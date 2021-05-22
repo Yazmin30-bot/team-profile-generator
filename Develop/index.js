@@ -116,3 +116,54 @@ const engineerQuestion = [
     },
 
 ];
+
+//Prompt internQuestions
+const internQuestion = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is your intern's name?",
+        validate: answer => {
+            if (answer !== '') {
+                return true;
+            }
+            return "Please enter at least one character."
+        }
+
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is your intern's id?",
+        validate: answer => {
+            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
+                return true;
+            }
+            return "Please enter at least one character"
+        }
+
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your intern's email?",
+        validate: answer => {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(answer)) {
+                return true;
+            }
+            return "Please enter a valid email address."
+        }
+
+    },
+    {
+        type: "input",
+        name: "school",
+        message: "What is your intern's school?",
+        validate: answer => {
+            if (answer !== '') {
+                return true;
+            }
+            return "Please enter at least one character."
+        }
+    },
+];
