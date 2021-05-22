@@ -313,6 +313,22 @@ function myfun(filePath){
     return fs.readFileSync(filePath, 'utf8');
 };
 
+//Append in the main file (index) all the members 
+function fillIndex() {
+    const srcIndex = './src/index.html'
+    const destIndex = './dist/index.html';
+    createFile(srcIndex, destIndex);
+    const content = memberInfoFinal.join('');
+
+     replace({
+        regex: "content-index",
+        replacement: content,
+        paths: [destIndex],
+        recursive: false,
+        silent: false,
+    });  
+};
+
 //Create another with the info of the member
 function createFile(srcURL, destURL) {
     fs.appendFile(destURL, '', function (err) {
