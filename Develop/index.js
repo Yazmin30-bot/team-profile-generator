@@ -188,7 +188,6 @@ const capitalize(str){
     return finalSentence = str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
 
-
 //Ask if you want to add a new member
 const promptForNewMember = () => {
     inquirer.prompt(memberTeam)
@@ -217,6 +216,23 @@ const promptForManager = () => {
             //With the answer create a new manager object
             const newManager = new Manager(name, answer.id, email.toLowerCase(), answer.phone);
             employees.push(newManager);
+            idArray.push(answer.id);
+            //Call the prompt member to ask if you want to add a new member
+            promptForNewMember();
+        })
+};
+
+//Show the question of engineer on the terminal and create a engineer class
+const promptForEngineer = () => {
+    inquirer.prompt(engineerQuestion)
+        .then(answer => {
+            const name = capitalize(answer.name);
+            const email = answer.email;
+            const github = capitalize(answer.github);
+            //With the answer create a new engineer object
+            const newEngineer = new Engineer(name, answer.id, email.toLowerCase(), github);
+            employees.push(newEngineer);
+            idArray.push(answer.id);
             //Call the prompt member to ask if you want to add a new member
             promptForNewMember();
         })
