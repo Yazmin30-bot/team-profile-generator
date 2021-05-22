@@ -36,7 +36,7 @@ const managerQuestion = [
             if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
                 return true;
             }
-            return "Please enter at least one character"
+            return "Please enter at least one character and dont use an exist id"
         }
 
     },
@@ -89,7 +89,7 @@ const engineerQuestion = [
             if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
                 return true;
             }
-            return "Please enter at least one character"
+            return "Please enter at least one character and dont use an exist id"
         }
 
     },
@@ -142,7 +142,7 @@ const internQuestion = [
             if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
                 return true;
             }
-            return "Please enter at least one character"
+            return "Please enter at least one character and dont use an exist id"
         }
 
     },
@@ -187,7 +187,8 @@ const memberTeam = [
 ];
 
 //Capitalize every word in a sentence
-const capitalize(str){
+function capitalize(str){
+    str = str.toLowerCase();
     return finalSentence = str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
 
@@ -251,6 +252,7 @@ const promptForIntern = () => {
             //With the answer create a new intern object
             const newIntern = new Intern(name, answer.id, email.toLowerCase(), school);
             employees.push(newIntern);
+            idArray.push(answer.id);
             //Call the prompt member to ask if you want to add a new member
             promptForNewMember();
 
@@ -261,7 +263,7 @@ const promptForIntern = () => {
 function renderOutput(memberArray) {
     memberArray.forEach(member => {
         if (member.getRole() === "Manager") {
-            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>'
+            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
             const data = [member.getName(), member.getId(), email, member.getOfficeNumber()];
             const regexArray = ["name-manager", "id-manager", "email-manager", "phone-manager"];
             const srcURL = './src/manager.html';
@@ -269,8 +271,8 @@ function renderOutput(memberArray) {
             //Fill out manager html file with the object manager
             fileMember(srcURL, destURL, data, regexArray);   
         } else if (member.getRole() === "Engineer") {
-            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>';
-            const github ='<a href="https://github.com/'+member.getGithub()+'" target="blank">GitHub</a>'
+            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
+            const github ='<a href="https://github.com/'+member.getGithub()+'" target="blank">GitHub: '+member.getGithub()+'</a>'
             const data = [member.getName(), member.getId(), email, github];
             const regexArray = ["name-engineer", "id-engineer", "email-engineer", "github-engineer"];
             const srcURL = path.resolve(__dirname, './src/engineer.html');
@@ -278,7 +280,7 @@ function renderOutput(memberArray) {
             //Fill out engineer html file with the object engineer 
             fileMember(srcURL, destURL, data, regexArray);
         } else if (member.getRole() === "Intern") {
-            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>';
+            const email = '<a href="mailto:'+member.getEmail()+'">Email: '+member.getEmail()+'</a>';
             const data = [member.getName(), member.getId(), email, member.getSchool()];
             const regexArray = ["name-intern", "id-intern", "email-intern", "school-intern"];
             const srcURL = path.resolve(__dirname, './src/intern.html');
