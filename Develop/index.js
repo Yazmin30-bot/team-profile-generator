@@ -308,6 +308,23 @@ function fileMember(srcURL, destURL, data, regexArray) {
     memberInfoFinal.push(myfun(destURL));
 };
 
+//Create another with the info of the member
+function createFile(srcURL, destURL) {
+    fs.appendFile(destURL, '', function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+    });
+    fs.copyFile(srcURL, destURL, (error) => {
+        // incase of any error
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        console.log("Copied Successfully!");
+    });
+};
+
 //Start the functionality of application
 const init = () => {
     //Show the question of manager on the terminal
