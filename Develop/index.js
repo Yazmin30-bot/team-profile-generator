@@ -7,8 +7,11 @@ const fs = require('fs');
 const replace = require('replace');
 const path = require('path');
 
+//Store every id
 const idArray = [];
+//Store every object member
 const employees = [];
+//Store the member with its html format
 const memberInfoFinal = [];
 
 //Prompt managerQuestions
@@ -282,9 +285,27 @@ function renderOutput(memberArray) {
 
     });
 
+    //Create a final html 
     fillIndex();
 
 
+};
+
+//Replace the info of every member in its template
+function fileMember(srcURL, destURL, data, regexArray) {
+    //Take the original template and create another with the info of the member
+    createFile(srcURL, destURL);
+    for (let i = 0; i < data.length; i++) {
+          replace({
+              regex: regexArray[i],
+              replacement: data[i],
+              paths: [destURL],
+              recursive: false,
+              silent: false,
+          });  
+    }
+    //Add the updated template to array 
+    memberInfoFinal.push(myfun(destURL));
 };
 
 //Start the functionality of application
