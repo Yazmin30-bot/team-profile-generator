@@ -7,6 +7,7 @@ const fs = require('fs');
 const replace = require('replace');
 const path = require('path');
 
+const idArray = [];
 const employees = [];
 const memberInfoFinal = [];
 
@@ -29,7 +30,7 @@ const managerQuestion = [
         name: "id",
         message: "What is the team manager's id?",
         validate: answer => {
-            if (/^[0-9]+$/.test(answer)) {
+            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
                 return true;
             }
             return "Please enter at least one character"
@@ -60,5 +61,58 @@ const managerQuestion = [
         }
     },
 
+
+];
+
+//Prompt engineerQuestions
+const engineerQuestion = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is your engineer's name?",
+        validate: answer => {
+            if (answer !== '') {
+                return true;
+            }
+            return "Please enter at least one character."
+        }
+
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is your engineer's id?",
+        validate: answer => {
+            if (/^[0-9]+$/.test(answer)&&idArray.indexOf(answer)===-1) {
+                return true;
+            }
+            return "Please enter at least one character"
+        }
+
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your engineer's email?",
+        validate: answer => {
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(answer)) {
+                return true;
+            }
+            return "Please enter a valid email address."
+        }
+
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "What is your engineer's GitHub username?",
+        validate: answer => {
+            if (answer !== '') {
+                return true;
+            }
+            return "Please enter at least one character."
+        }
+
+    },
 
 ];
