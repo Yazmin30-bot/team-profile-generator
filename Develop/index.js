@@ -261,21 +261,25 @@ const promptForIntern = () => {
 function renderOutput(memberArray) {
     memberArray.forEach(member => {
         if (member.getRole() === "Manager") {
-            const data = [member.getName(), member.getId(), member.getEmail(), member.getOfficeNumber()];
+            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>'
+            const data = [member.getName(), member.getId(), email, member.getOfficeNumber()];
             const regexArray = ["name-manager", "id-manager", "email-manager", "phone-manager"];
             const srcURL = './src/manager.html';
             const destURL = './dist/manager-' + member.getId() + '.html';
             //Fill out manager html file with the object manager
             fileMember(srcURL, destURL, data, regexArray);   
         } else if (member.getRole() === "Engineer") {
-            const data = [member.getName(), member.getId(), member.getEmail(), member.getGithub()];
+            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>';
+            const github ='<a href="https://github.com/'+member.getGithub()+'" target="blank">GitHub</a>'
+            const data = [member.getName(), member.getId(), email, github];
             const regexArray = ["name-engineer", "id-engineer", "email-engineer", "github-engineer"];
             const srcURL = path.resolve(__dirname, './src/engineer.html');
             const destURL = path.resolve(__dirname, './dist/engineer-' + member.getId() + '.html');
             //Fill out engineer html file with the object engineer 
             fileMember(srcURL, destURL, data, regexArray);
         } else if (member.getRole() === "Intern") {
-            const data = [member.getName(), member.getId(), member.getEmail(), member.getSchool()];
+            const email = '<a href="mailto:'+member.getEmail()+'>Email</a>';
+            const data = [member.getName(), member.getId(), email, member.getSchool()];
             const regexArray = ["name-intern", "id-intern", "email-intern", "school-intern"];
             const srcURL = path.resolve(__dirname, './src/intern.html');
             const destURL = path.resolve(__dirname, './dist/intern-' + member.getId() + '.html');
