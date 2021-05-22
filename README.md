@@ -6,6 +6,8 @@
   Create a command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. 
   * Uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
 
+  * Uses the [Replace package](https://www.npmjs.com/package/replace).
+
   * Uses the [Jest package](https://www.npmjs.com/package/jest) for a suite of unit tests.
   
 ## Table of Contents
@@ -55,6 +57,7 @@
     npm install
     npm install inquirer
     npm install replace
+    npm install jest
     ```
 ## Usage
   * The application will be invoked by using the following command:
