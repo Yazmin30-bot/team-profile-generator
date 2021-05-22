@@ -182,3 +182,11 @@ const memberTeam = [
 
     },
 ];
+
+//Star the functionality of application
+const init = () => {
+    //Show the question of manager on the terminal
+    promptForManager();
+
+};
+init();
