@@ -304,8 +304,13 @@ function fileMember(srcURL, destURL, data, regexArray) {
               silent: false,
           });  
     }
-    //Add the updated template to array 
+    //Add the updated template to array (Append every template member such a string) 
     memberInfoFinal.push(myfun(destURL));
+};
+
+//Read the file and returns its content
+function myfun(filePath){
+    return fs.readFileSync(filePath, 'utf8');
 };
 
 //Create another with the info of the member
