@@ -12,17 +12,21 @@
     "watch": "nodemon index",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "Yazmin30-bot"
-  },
   "author": "Yazmin Tinoco Perez",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.4.1",
-    "inquirer": "^6.2.1"
+    "inquirer": "^7.3.3",
+    "replace": "1.2.1"
   },
   "devDependencies": {
     "jest": "^24.8.0"
-  }
+  },
+  "keywords": [
+    "command",
+    "prompt",
+    "recursive",
+    "cli",
+    "generator"
+  ],
+  "typings": "dist/*.d.ts"
 }
