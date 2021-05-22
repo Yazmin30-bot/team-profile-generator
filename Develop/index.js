@@ -183,7 +183,26 @@ const memberTeam = [
     },
 ];
 
-//Star the functionality of application
+//Capitalize every word in a sentence
+const capitalize(str){
+    return finalSentence = str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+}
+
+//Show the question of manager on the terminal and create a manager class
+const promptForManager = () => {
+    inquirer.prompt(managerQuestion)
+        .then(answer => {
+            const name = capitalize(answer.name);
+            const email = answer.email;
+            //With the answer create a new manager object
+            const newManager = new Manager(name, answer.id, email.toLowerCase(), answer.phone);
+            employees.push(newManager);
+            //Call the prompt member to ask if you want to add a new member
+            promptForNewMember();
+        })
+};
+
+//Start the functionality of application
 const init = () => {
     //Show the question of manager on the terminal
     promptForManager();
