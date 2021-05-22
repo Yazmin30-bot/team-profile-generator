@@ -188,6 +188,26 @@ const capitalize(str){
     return finalSentence = str.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 }
 
+
+//Ask if you want to add a new member
+const promptForNewMember = () => {
+    inquirer.prompt(memberTeam)
+        .then(answer => {
+            //Show the question to add a new engineer member
+            if (answer.member === "Engineer") {
+                promptForEngineer();
+            //Show the question to add a new intern member    
+            } else if (answer.member === "Intern") {
+                promptForIntern();
+            } else {
+                //Create a html with the memebers added 
+                renderOutput(employees);
+                
+            }
+
+        })
+};
+
 //Show the question of manager on the terminal and create a manager class
 const promptForManager = () => {
     inquirer.prompt(managerQuestion)
