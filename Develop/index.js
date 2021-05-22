@@ -167,3 +167,18 @@ const internQuestion = [
         }
     },
 ];
+
+//Prompt member loop
+const memberTeam = [
+    {
+        type: "list",
+        name: "member",
+        message: "Which type of team member would you like to add",
+        choices: [
+            'Engineer',
+            'Intern',
+            'I dont to want to add any more team members'
+        ]
+
+    },
+];
