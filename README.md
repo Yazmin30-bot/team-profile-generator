@@ -4,6 +4,9 @@
 ## Description
   
   Create a command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. 
+  * Uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
+
+  * Uses the [Jest package](https://www.npmjs.com/package/jest) for a suite of unit tests.
   
 ## Table of Contents
   
